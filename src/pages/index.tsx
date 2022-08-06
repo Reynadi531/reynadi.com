@@ -1,10 +1,14 @@
-import Header from '@/components/Layout/Header';
-import Layout from '@/components/Layout/Layout';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
+
 import '@fontsource/inter/700.css';
-import Link from 'next/link';
+
+import FeaturedPosts from '@/components/Home/FeaturedPosts';
+import FeaturedProject from '@/components/Home/FeaturedProject';
 import Hero from '@/components/Home/Hero';
+import Footer from '@/components/Layout/Footer';
+import Header from '@/components/Layout/Header';
+import Layout from '@/components/Layout/Layout';
 const Home: NextPage = () => {
   return (
     <>
@@ -13,7 +17,10 @@ const Home: NextPage = () => {
         <Header />
         <main>
           <Hero />
+          <FeaturedProject />
+          <FeaturedPosts />
         </main>
+        <Footer />
       </Layout>
     </>
   );

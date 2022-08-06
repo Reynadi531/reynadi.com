@@ -1,8 +1,11 @@
-import React from 'react';
-import '@fontsource/rubik-glitch';
+import { Menu } from '@headlessui/react';
+import clsx from 'clsx';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import '@fontsource/rubik-glitch';
+import '@fontsource/inter';
 
 const menu = [
   {
@@ -28,33 +31,53 @@ const menu = [
 ];
 
 const Navbar: React.FC = () => {
-  const [isOpen, SetIsOpen] = React.useState(false);
+  const router = useRouter();
   return (
     <>
-      <nav className='sticky top-0 flex justify-center items-center h-20'>
+      <nav className='sticky top-0 flex justify-center items-center h-20 bg-gray-dark/30 backdrop-blur-sm'>
         <ul className='flex-1 flex'>
           <Link href='/'>
-            <li className='text-5xl font-display hover:cursor-pointer'>R</li>
+            <li className='text-5xl font-display hover:cursor-pointer hover:bg-gradient-to-r hover:bg-clip-text hover:text-transparent from-brand-orange to-brand-yellow transition-colors duration-200 ease-in'>
+              R
+            </li>
           </Link>
         </ul>
         <ul className='flex lg:hidden'>
-          <DropdownMenu.Root>
-            <DropdownMenu.Trigger className='p-2 hover:bg-gray rounded-lg'>
+          <Menu>
+            <Menu.Button className='p-2 hover:bg-gray rounded-lg'>
               <GiHamburgerMenu size='2rem' />
-            </DropdownMenu.Trigger>
-            <DropdownMenu.Content className='mt-4 shadow-xl'>
-              {menu.map((item) => (
-                <Link href={item.href}>
-                  <DropdownMenu.Item
-                    key={item.text}
-                    className='w-[32vw] flex items-center px-4 py-3 bg-gray hover:bg-gray/70 hover:cursor-pointer'
-                  >
-                    <h1>{item.text}</h1>
-                  </DropdownMenu.Item>
-                </Link>
+            </Menu.Button>
+            <Menu.Items className='absolute shadow-xl right-14 top-8 flex flex-col backdrop-blur-sm bg-gray/95 p-2 rounded-md gap-2 w-1/3'>
+              {menu.map((item, i) => (
+                <Menu.Item key={i}>
+                  <Link href={item.href} key={i}>
+                    <div
+                      key={i}
+                      className='hover:bg-gray-dark px-4 py-2 rounded-md hover:cursor-pointer'
+                    >
+                      {item.text}
+                    </div>
+                  </Link>
+                </Menu.Item>
               ))}
-            </DropdownMenu.Content>
-          </DropdownMenu.Root>
+            </Menu.Items>
+          </Menu>
+        </ul>
+        <ul className='hidden lg:flex flex-row space-x-12'>
+          {menu.map((item, i) => (
+            <Link href={item.href} key={i} passHref>
+              <a rel='noopener noreferrer'>
+                <li
+                  className={clsx(
+                    'text-md font-medium font-primary hover:cursor-pointer hover:text-white transition-colors duration-200 ease-in',
+                    item.href == router.asPath ? 'text-white' : 'text-[#B9B9B9]'
+                  )}
+                >
+                  {item.text}
+                </li>
+              </a>
+            </Link>
+          ))}
         </ul>
       </nav>
     </>

@@ -14,6 +14,7 @@ module.exports = {
       },
       fontFamily: {
         primary: ['Inter', ...fontFamily.sans],
+        sans: ['Inter', ...fontFamily.sans],
         display: ['Rubik Glitch'],
       },
     },
