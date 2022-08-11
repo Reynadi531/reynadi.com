@@ -14,7 +14,7 @@ const Hero: React.FC = () => {
           valuable products and understanding people needs
         </p>
         <div className='mt-4 bg-gradient-to-r from-brand-orange to-brand-yellow p-[2px]'>
-          <Link href='/contact'>
+          <Link href='/about'>
             <button className='text-md px-4 py-3 bg-gray-dark font-semibold hover:bg-gradient-to-r from-brand-orange to-brand-yellow hover:text-gray transition-colors duration-200 ease-in'>
               Learn more about me
             </button>

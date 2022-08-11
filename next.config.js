@@ -6,6 +6,7 @@ const nextConfig = {
     dirs: ['src'],
   },
   images: {
+    unoptimized: true,
     domains: ['images.unsplash.com'],
   },
   webpack: (config, { dev, isServer }) => {
