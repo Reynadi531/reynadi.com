@@ -20,7 +20,7 @@ const Card: React.FC<IProps> = ({
   return (
     <Link href={link} passHref>
       <a rel='noopener noreferrer'>
-        <div className='min-h-[24rem] max-w-[24rem] border-[1px] border-gray-light rounded-md hover:cursor-pointer'>
+        <div className='min-h-[24rem] w-[24rem] border-[1px] border-gray-light rounded-md hover:cursor-pointer'>
           <div className='h-full'>
             <div className='relative -z-10 w-full h-[12rem] bg-black rounded-md'>
               <Image

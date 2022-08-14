@@ -7,7 +7,7 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
-    domains: ['images.unsplash.com'],
+    domains: ['images.unsplash.com', 'images.ctfassets.net'],
   },
   webpack: (config, { dev, isServer }) => {
     // Replace React with Preact only in client production build
