@@ -1,9 +1,9 @@
-import { Menu } from '@headlessui/react';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { MdClose } from 'react-icons/md';
 import '@fontsource/rubik-glitch';
 import '@fontsource/inter';
 
@@ -32,6 +32,7 @@ const menu = [
 
 const Navbar: React.FC = () => {
   const router = useRouter();
+  const [isNavOpen, setIsNavOpen] = React.useState(false);
   return (
     <>
       <nav className='sticky top-0 flex justify-center items-center h-20 bg-gray-dark/30 backdrop-blur-sm'>
@@ -43,43 +44,54 @@ const Navbar: React.FC = () => {
           </Link>
         </ul>
         <ul className='flex lg:hidden'>
-          <Menu>
-            <Menu.Button className='p-2 hover:bg-gray rounded-lg'>
-              <GiHamburgerMenu size='2rem' />
-            </Menu.Button>
-            <Menu.Items className='absolute shadow-xl right-14 top-8 flex flex-col backdrop-blur-sm bg-gray/95 p-2 rounded-md gap-2 w-1/3'>
-              {menu.map((item, i) => (
-                <Menu.Item key={i}>
-                  <Link href={item.href} key={i}>
-                    <div
-                      key={i}
-                      className='hover:bg-gray-dark px-4 py-2 rounded-md hover:cursor-pointer'
-                    >
-                      {item.text}
-                    </div>
-                  </Link>
-                </Menu.Item>
-              ))}
-            </Menu.Items>
-          </Menu>
+          <button
+            className='p-2 hover:bg-gray rounded-lg'
+            onClick={() => setIsNavOpen(!isNavOpen)}
+          >
+            <GiHamburgerMenu size='2rem' />
+          </button>
         </ul>
         <ul className='hidden lg:flex flex-row space-x-12'>
           {menu.map((item, i) => (
-            <Link href={item.href} key={i} passHref>
-              <a rel='noopener noreferrer'>
-                <li
-                  className={clsx(
-                    'text-md font-medium font-primary hover:cursor-pointer hover:text-white transition-colors duration-200 ease-in',
-                    item.href == router.asPath ? 'text-white' : 'text-[#B9B9B9]'
-                  )}
-                >
-                  {item.text}
-                </li>
-              </a>
+            <Link href={item.href} key={i} rel='noopener noreferrer'>
+              <li
+                className={clsx(
+                  'text-md font-medium font-primary hover:cursor-pointer hover:text-white transition-colors duration-200 ease-in',
+                  item.href == router.asPath ? 'text-white' : 'text-[#B9B9B9]'
+                )}
+              >
+                {item.text}
+              </li>
             </Link>
           ))}
         </ul>
       </nav>
+      {isNavOpen && (
+        <div className='w-full h-full fixed left-0 top-0 z-50 bg-gray-dark p-4'>
+          <div className='flex-col w-full'>
+            <button
+              className='ml-auto mb-4'
+              onClick={() => setIsNavOpen(!isNavOpen)}
+            >
+              <MdClose size='2rem' />
+            </button>
+            {menu.map((item, i) => (
+              <div key={i} className='border-b border-gray py-5 mx-2'>
+                <Link href={item.href} key={i} rel='noopener noreferrer'>
+                  <h2
+                    className={clsx(
+                      'text-lg text-gray-light font-medium hover:text-white',
+                      item.href == router.asPath && 'text-white'
+                    )}
+                  >
+                    {item.text}
+                  </h2>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </>
   );
 };

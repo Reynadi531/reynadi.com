@@ -38,12 +38,10 @@ const FeaturedProject: React.FC<IProps> = ({
             title={title}
           />
 
-          <Link href='/' passHref>
-            <a rel='noopener noreferer'>
-              <p className='hover:text-gray-light hover:cursor-pointer mt-12 text-lg font-sans font-bold underline decoration-dashed underline-offset-8'>
-                See more
-              </p>
-            </a>
+          <Link href='/' rel='noopener noreferer'>
+            <p className='hover:text-gray-light hover:cursor-pointer mt-12 text-lg font-sans font-bold underline decoration-dashed underline-offset-8'>
+              See more
+            </p>
           </Link>
         </div>
       </div>
